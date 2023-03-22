@@ -2,8 +2,16 @@ import React from "react";
 import { Collection } from "./Collection";
 import "./index.scss";
 
+const cats = [
+  { name: "All" },
+  { name: "Ocean" },
+  { name: "Mountains" },
+  { name: "Architecture" },
+  { name: "Cities" },
+];
+
 function App() {
-  const [categoryIs, setCategoryId] = React.useState(0);
+  const [categoryId, setCategoryId] = React.useState(0);
   const [searchValue, setSearchValue] = React.useState("");
   const [collections, setCollections] = React.useState([]);
 
@@ -24,11 +32,16 @@ function App() {
       <h1>My pictures collection</h1>
       <div className="top">
         <ul className="tags">
-          <li className="active">All</li>
-          <li>Mountains</li>
-          <li>Ocean</li>
-          <li>Architecture</li>
-          <li>Cities</li>
+          {/* <li className="active">All</li> */}
+          {cats.map((obj, index) => (
+            <li
+              onClick={() => setCategoryId(index)}
+              key={obj.name}
+              className={categoryId === index ? "active" : ""}
+            >
+              {obj.name}
+            </li>
+          ))}
         </ul>
         <input
           value={searchValue}
